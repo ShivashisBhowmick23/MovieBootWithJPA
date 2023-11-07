@@ -20,16 +20,21 @@ public class Movies {
 
     private String rating;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "director_id")
+    private Directors directors;
+
 
 
  protected Movies() { //for using JPA we need to use NO ARGUMENTS CONSTRUCTOR
     }
 
-    public Movies(String movie_name, String movie_category, String releaseYear, String rating) {
+    public Movies(String movie_name, String movie_category, String releaseYear, String rating, Directors directors) {
         this.movie_name = movie_name;
         this.movie_category = movie_category;
         this.releaseYear = releaseYear;
         this.rating = rating;
+        this.directors = directors;
     }
 
 
@@ -49,6 +54,10 @@ public class Movies {
         this.rating = rating;
     }
 
+    public void setDirectors(Directors directors){
+     this.directors = directors;
+    }
+
     @Override
     public String toString() {
         return "Movies{" +
@@ -56,7 +65,8 @@ public class Movies {
                 ", movie_name='" + movie_name + '\'' +
                 ", movie_category='" + movie_category + '\'' +
                 ", releaseYear='" + releaseYear + '\'' +
-                ", Rating='" + rating + '\'' +
+                ", rating='" + rating + '\'' +
+                ", directors=" + directors +
                 '}';
     }
 }

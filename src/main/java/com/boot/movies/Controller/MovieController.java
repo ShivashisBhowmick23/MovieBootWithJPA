@@ -1,6 +1,8 @@
 package com.boot.movies.Controller;
 
+import com.boot.movies.Entity.Directors;
 import com.boot.movies.Entity.Movies;
+import com.boot.movies.Repository.DirectorsRepository;
 import com.boot.movies.Repository.MovieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -16,7 +18,7 @@ public class MovieController {
 
 
     @GetMapping("/{movie_id}")
-    public Movies findByMoiveId(@PathVariable("movie_id") int movie_id){
+    public Movies findByMovieId(@PathVariable("movie_id") int movie_id){
      return    movieRepository.findById(movie_id);
     }
 

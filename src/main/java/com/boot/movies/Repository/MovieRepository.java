@@ -20,6 +20,6 @@ public interface MovieRepository extends JpaRepository<Movies, Integer> {
     @Query(nativeQuery = true, value = "SELECT * FROM movies WHERE rating = ?")
     public  List<Movies> findByRating(String rating);
 
-    @Query(nativeQuery = true,value = "SELECT movie_id, movie_name, movie_category, rating, release_year FROM movies WHERE release_year = ?")
+    @Query(nativeQuery = true,value = "SELECT director_id,movie_id, movie_name, movie_category, rating, release_year FROM movies WHERE release_year = ?")
     public List<Movies> findByYear(String releaseYear);
 }
