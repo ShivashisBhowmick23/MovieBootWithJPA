@@ -3,6 +3,8 @@ package com.boot.movies.Entity;
 import jakarta.persistence.*;
 import lombok.Getter;
 
+import java.util.Date;
+
 @Getter
 @Entity
 public class Movies {
@@ -14,15 +16,20 @@ public class Movies {
 
     private String movie_category;
 
+    private String releaseYear;
+
+    private String rating;
+
 
 
  protected Movies() { //for using JPA we need to use NO ARGUMENTS CONSTRUCTOR
     }
 
-    public Movies(String movie_name, String movie_category) {
-
+    public Movies(String movie_name, String movie_category, String releaseYear, String rating) {
         this.movie_name = movie_name;
         this.movie_category = movie_category;
+        this.releaseYear = releaseYear;
+        this.rating = rating;
     }
 
 
@@ -34,12 +41,22 @@ public class Movies {
         this.movie_category = movie_category;
     }
 
+    public void setReleaseYear(String releaseYear) {
+        this.releaseYear = releaseYear;
+    }
+
+    public void setRating(String rating) {
+        this.rating = rating;
+    }
+
     @Override
     public String toString() {
         return "Movies{" +
                 "movie_id=" + movie_id +
                 ", movie_name='" + movie_name + '\'' +
                 ", movie_category='" + movie_category + '\'' +
+                ", releaseYear='" + releaseYear + '\'' +
+                ", Rating='" + rating + '\'' +
                 '}';
     }
 }
