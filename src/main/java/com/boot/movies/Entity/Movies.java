@@ -3,8 +3,6 @@ package com.boot.movies.Entity;
 import jakarta.persistence.*;
 import lombok.Getter;
 
-import java.util.Date;
-
 @Getter
 @Entity
 public class Movies {

@@ -19,7 +19,6 @@ public class MoviesConstant {
 
     public static final String MOVIES_BY_RATING = "/rating/{rating}";
 
-
     public static final String MOVIES_BY_RELEASE_YEAR = "/year/{releaseYear}";
 
     public static final String MOVIES_BY_DIRECTOR_NAME = "/directors/{director_name}";
