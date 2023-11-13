@@ -1,6 +1,5 @@
 package com.boot.movies.Controller;
 
-import com.boot.movies.Entity.Directors;
 import com.boot.movies.Entity.Movies;
 import com.boot.movies.Repository.DirectorsRepository;
 import com.boot.movies.Repository.MovieRepository;
@@ -69,6 +68,13 @@ public class MovieController {
     @GetMapping("/directors/{director_name}")
     public List<Movies> findByDirectorName(@PathVariable("director_name") String director_name) {
         List<Movies> movies = movieRepository.findByDirectorName(director_name);
+        return movies.stream().toList();
+
+    }
+
+    @GetMapping("/find-directors/{director_id}")
+    public List<Movies>  findDirectorsById(@PathVariable("director_id") int director_id) {
+        List<Movies> movies = movieRepository.findDirectorsById(director_id);
         return movies.stream().toList();
 
     }
