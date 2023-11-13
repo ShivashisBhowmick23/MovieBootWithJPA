@@ -12,6 +12,7 @@ import java.util.List;
 public class Directors {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
     private int director_id;
     private String director_name;
 
