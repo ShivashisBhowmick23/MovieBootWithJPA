@@ -23,7 +23,7 @@ public class Movies {
     private Directors directors;
 
 
-    protected Movies() { //for using JPA we need to use NO ARGUMENTS CONSTRUCTOR
+    public Movies() { //for using JPA we need to use NO ARGUMENTS CONSTRUCTOR
     }
 
     public Movies(String movie_name, String movie_category, String releaseYear, String rating, Directors directors) {
@@ -54,6 +54,8 @@ public class Movies {
     public void setDirectors(Directors directors) {
         this.directors = directors;
     }
+
+    public  void setMovie_id(int movie_id){ this.movie_id =movie_id; }
 
     @Override
     public String toString() {
