@@ -10,9 +10,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
 
@@ -35,7 +32,6 @@ class MoviesApplicationTests {
     @Mock
     private MovieRepository movieRepository;
 
-    Logger logger = LoggerFactory.getLogger(Movies.class);
     public List<Movies> getMovies() {
         Movies movies = new Movies();
         movies.setMovie_id(1);
@@ -140,7 +136,7 @@ class MoviesApplicationTests {
 
     @Test
     @DisplayName("TESTING FIND MOVIES BY RATING")
-    public void testFindMoviesByMovieRating(){
+    public void testFindMoviesByMovieRating() {
         List<Movies> mockMoviesList = getMovies();
         when(movieRepository.findByRating("8")).thenReturn(mockMoviesList);
         List<Movies> result = movieController.findByRating("8");
@@ -150,9 +146,10 @@ class MoviesApplicationTests {
 
 
     }
+
     @Test
     @DisplayName("TESTING FIND MOVIES BY WITH A INVALID RATING")
-    public void testFindMoviesByMovieRating_With_Invalid_Movie_Rating(){
+    public void testFindMoviesByMovieRating_With_Invalid_Movie_Rating() {
         List<Movies> mockMoviesList = getMovies();
         when(movieRepository.findByRating("1")).thenReturn(mockMoviesList);
         List<Movies> result = movieController.findByRating("1");
