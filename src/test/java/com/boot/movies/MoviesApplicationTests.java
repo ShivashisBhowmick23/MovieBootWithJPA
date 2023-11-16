@@ -11,7 +11,10 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.HttpStatus;
 
 
 import java.util.ArrayList;
@@ -20,6 +23,7 @@ import java.util.List;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
 @SpringBootTest
@@ -31,6 +35,7 @@ class MoviesApplicationTests {
     @Mock
     private MovieRepository movieRepository;
 
+    Logger logger = LoggerFactory.getLogger(Movies.class);
     public List<Movies> getMovies() {
         Movies movies = new Movies();
         movies.setMovie_id(1);
@@ -81,6 +86,7 @@ class MoviesApplicationTests {
         verify(movieRepository, times(1)).findAllMovies();
         // Assertions
         assertThat(result).isNotNull();
+        assertEquals(HttpStatus.OK, HttpStatus.resolve(200));
 
     }
 
@@ -105,6 +111,56 @@ class MoviesApplicationTests {
         Movies result = movieController.findByMovieId(1);
         verify(movieRepository, times(1)).findById(1);
         assertThat(result).isEqualTo(movies);
+        assertEquals(HttpStatus.OK, HttpStatus.resolve(200));
+    }
+
+    @Test
+    @DisplayName("TESTING FIND MOVIE BY MOVIE ID WITH A INVALID MOVIE ID METHOD")
+    public void testFindMovieById_Not_Valid_Movie_ID() {
+        Movies movies = new Movies();
+        movies.setMovie_id(1);
+        movies.setMovie_name("Now You See Me");
+        movies.setMovie_category("Comedy");
+        movies.setRating("8");
+        movies.setReleaseYear("2018");
+
+
+        Directors directors = new Directors();
+        directors.setDirector_id(1);
+        directors.setDirector_name("David Werner");
+        directors.setId(1);
+
+        movies.setDirectors(directors);
+        when(movieRepository.findById(12)).thenReturn(movies);
+        Movies result = movieController.findByMovieId(12);
+        verify(movieRepository, times(1)).findById(12);
+        assertThat(result).isEqualTo(movies);
+        assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, HttpStatus.resolve(500));
+    }
+
+    @Test
+    @DisplayName("TESTING FIND MOVIES BY RATING")
+    public void testFindMoviesByMovieRating(){
+        List<Movies> mockMoviesList = getMovies();
+        when(movieRepository.findByRating("8")).thenReturn(mockMoviesList);
+        List<Movies> result = movieController.findByRating("8");
+        verify(movieRepository, times(1)).findByRating("8");
+        assertThat(result).isEqualTo(mockMoviesList);
+        assertEquals(HttpStatus.OK, HttpStatus.resolve(200));
+
+
+    }
+    @Test
+    @DisplayName("TESTING FIND MOVIES BY WITH A INVALID RATING")
+    public void testFindMoviesByMovieRating_With_Invalid_Movie_Rating(){
+        List<Movies> mockMoviesList = getMovies();
+        when(movieRepository.findByRating("1")).thenReturn(mockMoviesList);
+        List<Movies> result = movieController.findByRating("1");
+        verify(movieRepository, times(1)).findByRating("1");
+        assertThat(result).isEqualTo(mockMoviesList);
+        assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, HttpStatus.resolve(500));
+
+
     }
 
 }
