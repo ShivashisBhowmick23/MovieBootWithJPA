@@ -18,7 +18,7 @@ public class Movies {
 
     private String rating;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id")
     private Directors directors;
 

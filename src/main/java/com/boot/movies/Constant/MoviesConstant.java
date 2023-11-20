@@ -1,4 +1,4 @@
-package com.boot.movies.constant;
+package com.boot.movies.Constant;
 
 import org.springframework.stereotype.Component;
 
